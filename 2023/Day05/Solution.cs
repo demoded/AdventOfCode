@@ -165,4 +165,37 @@ internal class Solution
 
         Console.WriteLine($"Part 2 Min location: {result}");
     }
+
+    internal static void TestRangeIntersection()
+    {
+        TestIntersection((0, 10), (5, 7));   // expected output [0:4][5:7][8:10]
+        TestIntersection((0, 10), (5, 15));  // expected output [0:4][5:10][11:15]
+        TestIntersection((0, 10), (15, 20)); // expected output [0:10][15:20]
+        TestIntersection((5, 10), (0, 7));   // expected output [0:4][5:7][8:10]
+
+        // [A.start                                               A.end]
+        //                       [B.start    B.end]
+        // [A.start    B.start-1][B.start    B.end][B.end + 1     A.end]
+        // [BEFORE              ][INTERSECTION    ][AFTER              ]
+        void TestIntersection((long start, long end) a, (long start, long end) b)
+        {
+            (long start, long end) before = (a.start, Math.Min(a.end, b.start));
+            (long start, long end) intersection = (Math.Max(a.start, b.start), Math.Min(a.end, b.end));
+            (long start, long end) after = (Math.Max(a.start, b.end), a.end);
+
+            if (before.end >= before.start)
+            {
+                Console.Write($"[{before.start}:{before.end}]");
+            }
+            if (intersection.end >= intersection.start)
+            {
+                Console.Write($"[{intersection.start}:{intersection.end}]");
+            }
+            if (after.end >= after.start)
+            {
+                Console.Write($"[{after.start}:{after.end}]");
+            }
+            Console.WriteLine();
+        }
+    }
 }

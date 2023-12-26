@@ -3,6 +3,7 @@
     private static void Main(string[] args)
     {
         Console.WriteLine("--- Day 5: If You Give A Seed A Fertilizer ---");
-        Solution.Run();
+        //Solution.Run();
+        Solution.TestRangeIntersection();
     }
 }
