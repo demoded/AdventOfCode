@@ -35,7 +35,7 @@ internal class Solution
                 var bonus = cardMatches[index];
                 if (bonus > 0)
                 {
-                    Enumerable.Range(index+1, bonus).ToList().ForEach(e => copyScratchQueue.Enqueue(e));
+                    Enumerable.Range(index+1, bonus).ToList().ForEach(copyScratchQueue.Enqueue);
                 }
             }
         }
@@ -55,8 +55,8 @@ internal struct Scratchcard
         var semicolonPos = line.IndexOf(':');
         var pipePos = line.IndexOf('|');
 
-        testNumbers = line.AsSpan().Slice(pipePos + 1).ToString().Split(' ').Where(e => !string.IsNullOrWhiteSpace(e)).Select(n => int.Parse(n)).ToArray();
-        winningNumbers = line.AsSpan().Slice(semicolonPos + 1, pipePos - semicolonPos - 1).ToString().Split(' ').Where(e => !string.IsNullOrWhiteSpace(e)).Select(n => int.Parse(n)).ToArray();
+        testNumbers = line.AsSpan().Slice(pipePos + 1).ToString().Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Select(int.Parse).ToArray();
+        winningNumbers = line.AsSpan().Slice(semicolonPos + 1, pipePos - semicolonPos - 1).ToString().Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Select(int.Parse).ToArray();
     }
 
     internal int CountMatches()
