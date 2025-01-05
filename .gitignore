@@ -1,4 +1,5 @@
-﻿/2023/.vs
-/2023/*/obj
-/2023/*/bin
-/2023/*/input*
+﻿*/.vs
+**/obj
+**/bin
+**/input*
+**/example*
